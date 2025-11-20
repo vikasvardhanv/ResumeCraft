@@ -1,0 +1,16 @@
+{
+  "name": "resumecraft",
+  "version": "1.0.0",
+  "description": "Production-ready landing page for the Resume Craft Chrome extension.",
+  "main": "api/site.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "stripe": "^20.0.0"
+  }
+}

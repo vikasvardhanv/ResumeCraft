@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resume Craft is a Chrome extension backed by a Node.js server running at https://resumecraft.dev that tailors your resume to every job posting.">
+    <meta property="og:title" content="Resume Craft – AI Resume Tailoring">
+    <meta property="og:description" content="Tailor every resume in seconds and upgrade to Premium via our secure Node checkout.">
+    <meta property="og:url" content="https://resumecraft.dev/">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://resumecraft.dev/">
+    <title>Resume Craft | AI Resume Tailoring for Every Job</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.8em' font-size='80'%3E📄%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <p class="tagline">Hosted on https://resumecraft.dev</p>
+                <h1 class="gradient-text">Craft every resume with AI</h1>
+                <p class="description">Resume Craft analyzes any job posting, rewrites your bullet points, and keeps a history of everything you send. Install the Chrome extension for free or upgrade to Premium when you need more firepower.</p>
+                <div class="cta-buttons">
+                    <button id="installBtn" class="btn btn-primary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Add to Chrome – Free
+                    </button>
+                    <a class="btn btn-secondary" href="/premium">Explore Premium</a>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <span class="stat-label">ATS optimized drafts</span>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            </svg>
+                        </div>
+                        <span class="stat-label">Private & encrypted</span>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18"></path>
+                                <path d="M7 13l3 3 7-7"></path>
+                            </svg>
+                        </div>
+                        <span class="stat-label">Backed by Node + Stripe</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="browser-mockup">
+                    <div class="browser-header">
+                        <div class="browser-dots"><span></span><span></span><span></span></div>
+                        <div class="browser-url">https://resumecraft.dev/create-checkout-session</div>
+                    </div>
+                    <div class="browser-content">
+                        <div class="extension-demo">
+                            <div class="demo-header">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"></path>
+                                    <path d="M14.31 8l5.74 9.94"></path>
+                                    <path d="M9.69 8h11.48"></path>
+                                    <path d="M7.38 12l2.86-4.94"></path>
+                                    <path d="M9.69 16L3.95 6.06"></path>
+                                    <path d="M14.31 16H2.83"></path>
+                                    <path d="M16.62 12l-2.86 4.94"></path>
+                                </svg>
+                                <h3>Live Tailoring Preview</h3>
+                            </div>
+                            <div class="demo-section">
+                                <p class="demo-label">Resume Match Score</p>
+                                <div class="demo-score">
+                                    <div class="score-circle">
+                                        <div>
+                                            <div class="score-value">92%</div>
+                                            <div class="score-label">MATCH</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <strong>Job: Product Manager, Stripe</strong>
+                                        <p>Summary rewritten with the key metrics hiring teams expect.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="demo-section">
+                                <p class="demo-label">Highlighted Skills</p>
+                                <div class="skill-tags">
+                                    <span class="tag">Experimentation</span>
+                                    <span class="tag">Roadmaps</span>
+                                    <span class="tag">Stakeholders</span>
+                                    <span class="tag">Payments</span>
+                                </div>
+                            </div>
+                            <div class="demo-section">
+                                <p class="demo-label">Premium Extras</p>
+                                <ul class="pricing-features">
+                                    <li>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                        Stripe-powered checkout handled by our Node endpoint
+                                    </li>
+                                    <li>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                        Saved drafts & collaboration links
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Why job seekers choose Resume Craft</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <h3>AI rewrite engine</h3>
+                        <p>Highlight the impact behind your bullet points and instantly match the tone of every job description.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18"></path>
+                                <path d="M7 13l3 3 7-7"></path>
+                            </svg>
+                        </div>
+                        <h3>Private workspace</h3>
+                        <p>Everything lives on our secure Node.js backend. Nothing is shared without your consent.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2l7 4v8l-7 4-7-4V6z"></path>
+                                <path d="M12 22V12"></path>
+                            </svg>
+                        </div>
+                        <h3>Premium onboarding</h3>
+                        <p>When you upgrade, payments run through https://resumecraft.dev/create-checkout-session using Stripe Checkout.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2>How Resume Craft Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">1</div>
+                        <h3>Install</h3>
+                        <p>Add the extension to Chrome in developer mode while we await store approval.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">2</div>
+                        <h3>Scan any job</h3>
+                        <p>Open LinkedIn, Indeed, or any job listing and click the Resume Craft icon.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">3</div>
+                        <h3>Review insights</h3>
+                        <p>See required skills, missing keywords, and AI suggestions inside the sidebar.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">4</div>
+                        <h3>Upgrade when ready</h3>
+                        <p>Need unlimited analyses or collaboration? Head to <a href="/premium">resumecraft.dev/premium</a> and we'll start checkout for you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="premium">
+            <div class="container">
+                <h2>Choose Your Plan</h2>
+                <p class="pricing-subtitle">Start free, upgrade when you need more</p>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Free</h3>
+                            <div class="price">
+                                <span class="price-amount">$0</span>
+                                <span class="price-period">/month</span>
+                            </div>
+                            <p class="pricing-description">Perfect for casual job seekers</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                5 resume analyses per month
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Basic skill matching
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Resume storage
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Job match scores
+                            </li>
+                            <li class="disabled">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                                ATS optimization analysis
+                            </li>
+                            <li class="disabled">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                                Industry insights
+                            </li>
+                        </ul>
+                        <button class="btn btn-outline">Current Plan</button>
+                    </div>
+
+                    <div class="pricing-card pricing-card-featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>Premium</h3>
+                                <div class="price">
+                                    <span class="price-amount">$9.99</span>
+                                    <span class="price-period">/mo</span>
+                            </div>
+                            <p class="pricing-description">Unlimited AI tailoring + team sharing.</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Unlimited job scans per month
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Collaboration links & history
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Priority email + Slack support
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Stripe Checkout hosted at resumecraft.dev
+                            </li>
+                        </ul>
+                        <a class="btn btn-primary" href="/premium">Upgrade to Premium</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to tailor your next resume?</h2>
+                <p>Resume Craft is already live on https://resumecraft.dev – install the extension or jump into Premium.</p>
+                <div class="cta-buttons" style="justify-content:center;">
+                    <button id="installBtnBottom" class="btn btn-primary">Add Extension</button>
+                    <a class="btn btn-secondary" href="/premium">Go to Premium Checkout</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Resume Craft</h3>
+                    <p>AI resume tailoring built for serious job seekers. Hosted entirely on resumecraft.dev.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How it works</a></li>
+                        <li><a href="/premium">Premium</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:support@resumecraft.dev">support@resumecraft.dev</a></li>
+                        <li><a href="https://github.com/vikasvardhanv" target="_blank" rel="noreferrer">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/vikasvardhanv/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Resume Craft. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="installModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Install Resume Craft manually</h2>
+            <div class="install-steps">
+                <div class="install-step">
+                    <strong>Download the extension</strong>
+                    <p>Grab the latest build from <a href="https://github.com/vikasvardhanv/resumeIt/releases" target="_blank" rel="noreferrer">GitHub Releases</a>.</p>
+                </div>
+                <div class="install-step">
+                    <strong>Load it in Chrome</strong>
+                    <ol>
+                        <li>Visit <code>chrome://extensions/</code></li>
+                        <li>Enable <em>Developer mode</em></li>
+                        <li>Click <em>Load unpacked</em> and select the extracted folder</li>
+                    </ol>
+                </div>
+                <div class="install-step">
+                    <strong>Need help?</strong>
+                    <p>Email <a href="mailto:support@resumecraft.dev">support@resumecraft.dev</a> and we will walk you through it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CHROME_STORE_URL = 'https://chrome.google.com/webstore/detail/resume-tailor/YOUR_EXTENSION_ID';
+        const GITHUB_RELEASES_URL = 'https://github.com/vikasvardhanv/resumeIt/releases';
+
+        function isChrome() {
+            return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        }
+
+        function checkExtensionInstalled() {
+            return document.querySelector('[data-resumetailor-installed]') !== null;
+        }
+
+        function handleInstall() {
+            if (!isChrome()) {
+                showModal();
+                return;
+            }
+
+            if (checkExtensionInstalled()) {
+                alert('Resume Craft is already installed! Visit any job posting to start using it.');
+                return;
+            }
+
+            showModal();
+            // window.open(CHROME_STORE_URL, '_blank'); // Enable once published
+        }
+
+        function showModal() {
+            const modal = document.getElementById('installModal');
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('installModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const installBtn = document.getElementById('installBtn');
+            const installBtnBottom = document.getElementById('installBtnBottom');
+
+            if (installBtn) {
+                installBtn.addEventListener('click', handleInstall);
+            }
+
+            if (installBtnBottom) {
+                installBtnBottom.addEventListener('click', handleInstall);
+            }
+
+            const modal = document.getElementById('installModal');
+            const closeBtn = modal ? modal.querySelector('.modal-close') : null;
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', hideModal);
+            }
+
+            window.addEventListener('click', (e) => {
+                if (modal && e.target === modal) {
+                    hideModal();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+                    hideModal();
+                }
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            if (!isChrome()) {
+                [installBtn, installBtnBottom].forEach(btn => {
+                    if (btn) {
+                        btn.innerHTML = `
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            Chrome Required
+                        `;
+                        btn.style.background = '#EF4444';
+                        btn.style.cursor = 'pointer';
+                    }
+                });
+            }
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.step, .feature').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+
+            function trackEvent(action, label) {
+                console.log('Event:', action, label);
+            }
+
+            [installBtn, installBtnBottom].forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        trackEvent('click_install', 'install_button');
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'RESUME_TAILOR_INSTALLED') {
+                document.body.setAttribute('data-resumetailor-installed', 'true');
+                console.log('Resume Tailor extension detected');
+            }
+        });
+
+        window.postMessage({ type: 'CHECK_RESUME_TAILOR_INSTALLED' }, '*');
+    </script>
+</body>
+</html>
