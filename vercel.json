@@ -1,8 +1,16 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/api/site" },
-    { "source": "/premium", "destination": "/api/premium" },
-    { "source": "/premium/", "destination": "/api/premium" },
-    { "source": "/create-checkout-session", "destination": "/api/create-checkout-session" }
+    {
+      "source": "/",
+      "destination": "/api/site"
+    },
+    {
+      "source": "/premium",
+      "destination": "/api/premium"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    }
   ]
 }
